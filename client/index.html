@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch</title>
+    <script>
+        const api = "https://electric-amethyst-coyote.glitch.me";
+        const get = `${api}/get-never-responds`;
+        const post = `${api}/post-never-responds`;
+
+        function performRequest(method, url) {
+            const startTime = performance.now();
+            fetch(url, {
+                method,
+            }).catch((exception) => {
+                const endTime = performance.now();
+                const ms = endTime - startTime;
+                const min = Math.floor((ms / 1000 / 60) << 0);
+
+                console.log(
+                    `Call to ${method} ${url} exception.  At ${min}min  ||  ${ms}ms.`
+                );
+            });
+        }
+
+        function requestGet() {
+            performRequest("GET", get);
+        }
+
+        function requestPost() {
+            performRequest("POST", post);
+        }
+
+        try {
+            // Create the performance observer.
+            const po = new PerformanceObserver((list) => {
+                for (const entry of list.getEntries()) {
+                    // If transferSize is 0, the resource was fulfilled via the cache.
+                    console.log(entry.name, entry);
+                }
+            });
+            // Start listening for `resource` entries to be dispatched.
+            po.observe({ type: "resource", buffered: true });
+        } catch (e) {
+            // Do nothing if the browser doesn't support this API.
+        }
+    </script>
+</head>
+
+<body>
+    <button type="button" onclick="requestGet()">with get</button>
+    <button type="button" onclick="requestPost()">with post</button>
+</body>
+
+</html>
