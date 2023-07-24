@@ -76,8 +76,9 @@ OS: MacOS - Ventura 13.4.1
 Browser Version: 115.0.2
 
 ### Get
+Time Spent till timeout:  180420ms.
+Full PerformanceResourceTiming object:
 
- 180420ms.
  ```json
 {
   "name": "https://electric-amethyst-coyote.glitch.me/post-never-responds",
@@ -107,8 +108,9 @@ Browser Version: 115.0.2
 
 
 ### Post
-180808ms.
 
+Time Spent till timeout:  180808ms.
+Full PerformanceResourceTiming object:
 ```json
 {
   "name": "https://electric-amethyst-coyote.glitch.me/get-never-responds",
@@ -135,3 +137,14 @@ Browser Version: 115.0.2
   "serverTiming": []
 }
 ```
+
+
+# Safari
+## 1
+### Get 
+
+
+Time Spent till timeout:  180307ms.
+
+### Post 
+Time Spent till timeout:  180235ms.
