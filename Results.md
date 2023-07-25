@@ -1,6 +1,8 @@
 # Chrome
+<details>
+  <summary> 1 - MacOS Ventura 13.4.1</summary>
 
-## 1
+    
 OS: MacOS - Ventura 13.4.1
 Browser Version:  114.0.5735.198
 ### Get
@@ -70,9 +72,31 @@ Full PerformanceResourceTiming object:
 
 ```
 
+
+</details>
+
+
+<details>
+  <summary> 2 - iOS 16.5.1 </summary>
+
+    Browser Version: 115.0.5790.130
+
+  ### GET
+  180971ms
+
+  ### POST
+  181004.ms
+
+  ### Ressalvas
+  Em caso do celular bloquear a espera da requisicao é interrompida no momento do bloqueio
+  </details>
+
 # Firefox
-## 1
-OS: MacOS - Ventura 13.4.1
+
+<details>
+  <summary> 1 - MacOS Ventura 13.4.1</summary>
+
+
 Browser Version: 115.0.2
 
 ### Get
@@ -139,8 +163,14 @@ Full PerformanceResourceTiming object:
 ```
 
 
+</details>
+
 # Safari
-## 1
+
+<details>
+  <summary> 1 - MacOS Ventura 13.4.1</summary>
+
+Browser Version: 115.0.2
 ### Get 
 
 
@@ -148,3 +178,19 @@ Time Spent till timeout:  180307ms.
 
 ### Post 
 Time Spent till timeout:  180235ms.
+
+
+</details>
+<details>
+  <summary> 2 - iOS 16.5.1 </summary>
+Browser Version:  16.5.1
+
+    > On safari at ios, on screen lock the request is "freeze". When this happen request with large timeout was seen, such as 348123ms
+### Get 
+-  180293ms
+
+### Post 
+- 180928ms
+
+
+</details>
