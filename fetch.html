@@ -6,7 +6,7 @@
     <title>Fetch</title>
     <script src="https://cdn.jsdelivr.net/gh/schirrel/remote-logger@main/lib/remote-logger.min.js"></script>
     <script>
-      DebugRemoteLogger("0dPlRR5ZVPNJ6gzRc2yk")
+      DebugRemoteLogger("0dPlRR5ZVPNJ6gzRc2yk");
       const api = "https://electric-amethyst-coyote.glitch.me";
 
       function performFetch(method, url) {
@@ -41,8 +41,7 @@
 
       const po = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          // if (entry.name.startsWith(api)) 
-          console.log(entry.name, entry);
+          if (entry.name.startsWith(api)) console.log(entry.name, entry);
         }
       });
       po.observe({ type: "resource", buffered: true });
