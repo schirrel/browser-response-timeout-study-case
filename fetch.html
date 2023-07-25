@@ -19,7 +19,7 @@
           const min = Math.floor((milli / 1000 / 60) << 0);
 
           console.log(
-            `Call to ${method} ${url} exception.  At ${min}min  ||  ${milli}ms.`
+            `Call to ${method} ${url} exception.  At ${min}min  ||  ${milli}ms. At ${navigator.userAgent}`
           );
         });
       }
@@ -38,15 +38,14 @@
       function postLateResponse() {
         performFetch("POST", `${api}/post-late-responds`);
       }
-      try {
-        // Create the performance observer.
-        const po = new PerformanceObserver((list) => {
-          for (const entry of list.getEntries()) {
-            if (entry.name.startsWith(api)) console.log(entry.name, entry);
-          }
-        });
-        po.observe({ type: "resource", buffered: true });
-      } catch (e) {}
+
+      const po = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          // if (entry.name.startsWith(api)) 
+          console.log(entry.name, entry);
+        }
+      });
+      po.observe({ type: "resource", buffered: true });
     </script>
   </head>
   <body>
