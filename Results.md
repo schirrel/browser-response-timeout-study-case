@@ -1,5 +1,6 @@
 So far:
 - Overall timeout is: 180000
+- PerformanceResourceTiming doesnt working on Safari when timeout happens
 
 # Chrome
 <details>
