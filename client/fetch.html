@@ -4,18 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fetch</title>
+    <script src="https://cdn.jsdelivr.net/gh/schirrel/remote-logger@main/lib/remote-logger.min.js"></script>
     <script>
+      DebugRemoteLogger("hqJytWAaZsNsh3PXfzKU")
       const api = "https://electric-amethyst-coyote.glitch.me";
-      const get = `${api}/get-never-responds`;
-      const post = `${api}/post-never-responds`;
 
-      function dofetch(method, url) {
+      function performFetch(method, url) {
         const t0 = performance.now();
         fetch(url, {
           method,
         }).catch((exception) => {
-          console.log(exception);
-
           const t1 = performance.now();
           const milli = t1 - t0;
           const min = Math.floor((milli / 1000 / 60) << 0);
@@ -26,35 +24,44 @@
         });
       }
 
-      function getfetch() {
-        dofetch("GET", get);
+      function getNeverResponse() {
+        performFetch("GET", `${api}/get-never-responds`);
       }
 
-      function postfetch() {
-        dofetch("POST", post);
+      function postNeverResponse() {
+        performFetch("POST", `${api}/post-never-responds`);
+      }
+      function getLateResponse() {
+        performFetch("GET", `${api}/get-late-responds`);
       }
 
+      function postLateResponse() {
+        performFetch("POST", `${api}/post-late-responds`);
+      }
       try {
         // Create the performance observer.
         const po = new PerformanceObserver((list) => {
           for (const entry of list.getEntries()) {
-            // If transferSize is 0, the resource was fulfilled via the cache.
-            console.log(entry.name, entry);
+            if (entry.name.startsWith(api)) console.log(entry.name, entry);
           }
         });
-        // Start listening for `resource` entries to be dispatched.
         po.observe({ type: "resource", buffered: true });
-      } catch (e) {
-        console.log("Browser nao suporta")
-        console.log(e)
-        
-
-        // Do nothing if the browser doesn't support this API.
-      }
+      } catch (e) {}
     </script>
   </head>
   <body>
-    <button type="button" onclick="getfetch()">with get</button>
-    <button type="button" onclick="postfetch()">with post</button>
+    <button type="button" onclick="getNeverResponse()">
+      get - never response
+    </button>
+    <button type="button" onclick="postNeverResponse()">
+      post - never response
+    </button>
+
+    <button type="button" onclick="getLateResponse()">
+      get - late response - 5s
+    </button>
+    <button type="button" onclick="postLateResponse()">
+      post- late response - 5s
+    </button>
   </body>
 </html>
