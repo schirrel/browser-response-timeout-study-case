@@ -1,3 +1,6 @@
+So far:
+- Overall timeout is: 180000
+
 # Chrome
 <details>
   <summary> 1 - MacOS Ventura 13.4.1</summary>
@@ -80,6 +83,7 @@ Full PerformanceResourceTiming object:
   <summary> 2 - iOS 16.5.1 </summary>
 
     Browser Version: 115.0.5790.130
+  > On screen lock, the request await is interupt at the moment of lock so the timeout becames smaller
 
   ### GET
   180971ms
@@ -87,8 +91,6 @@ Full PerformanceResourceTiming object:
   ### POST
   181004.ms
 
-  ### Ressalvas
-  Em caso do celular bloquear a espera da requisicao é interrompida no momento do bloqueio
   </details>
 
 # Firefox
