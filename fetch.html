@@ -19,7 +19,7 @@
           const min = Math.floor((milli / 1000 / 60) << 0);
 
           console.log(
-            `Call to ${method} ${url} exception.  At ${min}min  ||  ${milli}ms. At ${navigator}`
+            `Call to ${method} ${url} exception.  At ${min}min  ||  ${milli}ms. At ${JSON.stringify(navigator)}`
           );
         });
       }
