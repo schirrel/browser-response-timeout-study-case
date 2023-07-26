@@ -3,44 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fetch</title>
+    <title>Axios</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/schirrel/remote-logger@main/lib/remote-logger.min.js"></script>
     <script>
-      DebugRemoteLogger("T6X6cwxcY2Wvgf6vx4Eu");
-      const api = "https://electric-amethyst-coyote.glitch.me";
+      DebugRemoteLogger("gyalS70vFjlKXieCIMVP");
+      const api = axios.create({
+        baseURL: "https://geode-ethereal-clarinet.glitch.me",
+        timeout: 600000,
+        headers: { Connnection: "keep-alive" },
+      });
 
       function performFetch(method, url) {
         const t0 = performance.now();
-        fetch(url, {
-          method,
-          headers: {
-            Connnection: "keep-alive",
-            "Keep-Alive": `timeout=${60 * 10}`,
-          },
-        }).catch((exception) => {
-          const t1 = performance.now();
-          const milli = t1 - t0;
-          const min = Math.floor((milli / 1000 / 60) << 0);
+        api[method](url)
+          .then(console.debug)
+          .catch((exception) => {
+            const t1 = performance.now();
+            const milli = t1 - t0;
+            const min = Math.floor((milli / 1000 / 60) << 0);
 
-          console.log(
-            `Call to ${method} ${url} exception.  At ${min}min  ||  ${milli}ms. At ${navigator.userAgent}`
-          );
-        });
+            console.log(
+              `Call to ${method} ${url} exception.  At ${min}min  ||  ${milli}ms. At ${navigator.userAgent}`
+            );
+          });
       }
 
       function getNeverResponse() {
-        performFetch("GET", `${api}/get-never-responds`);
+        performFetch("get", `/get-never-responds`);
       }
 
       function postNeverResponse() {
-        performFetch("POST", `${api}/post-never-responds`);
+        performFetch("post", `/post-never-responds`);
       }
       function getLateResponse() {
-        performFetch("GET", `${api}/get-late-responds`);
+        performFetch("get", `/get-late-responds`);
       }
 
       function postLateResponse() {
-        performFetch("POST", `${api}/post-late-responds`);
+        performFetch("post", `/post-late-responds`);
       }
 
       const po = new PerformanceObserver((list) => {
