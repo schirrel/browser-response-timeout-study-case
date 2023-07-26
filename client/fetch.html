@@ -6,20 +6,24 @@
     <title>Fetch</title>
     <script src="https://cdn.jsdelivr.net/gh/schirrel/remote-logger@main/lib/remote-logger.min.js"></script>
     <script>
-      DebugRemoteLogger("0dPlRR5ZVPNJ6gzRc2yk")
+      DebugRemoteLogger("T6X6cwxcY2Wvgf6vx4Eu");
       const api = "https://electric-amethyst-coyote.glitch.me";
 
       function performFetch(method, url) {
         const t0 = performance.now();
         fetch(url, {
           method,
+          headers: {
+            Connnection: "keep-alive",
+            "Keep-Alive": `timeout=${60 * 10}`,
+          },
         }).catch((exception) => {
           const t1 = performance.now();
           const milli = t1 - t0;
           const min = Math.floor((milli / 1000 / 60) << 0);
 
           console.log(
-            `Call to ${method} ${url} exception.  At ${min}min  ||  ${milli}ms.`
+            `Call to ${method} ${url} exception.  At ${min}min  ||  ${milli}ms. At ${navigator.userAgent}`
           );
         });
       }
@@ -38,15 +42,13 @@
       function postLateResponse() {
         performFetch("POST", `${api}/post-late-responds`);
       }
-      try {
-        // Create the performance observer.
-        const po = new PerformanceObserver((list) => {
-          for (const entry of list.getEntries()) {
-            if (entry.name.startsWith(api)) console.log(entry.name, entry);
-          }
-        });
-        po.observe({ type: "resource", buffered: true });
-      } catch (e) {}
+
+      const po = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          if (entry.name.startsWith(api)) console.log(entry.name, entry);
+        }
+      });
+      po.observe({ type: "resource", buffered: true });
     </script>
   </head>
   <body>

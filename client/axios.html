@@ -1,14 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <nav>
-        <a href="fetch.html">Using Fetch</a>
-        <a href="axios.html">Using Axios</a>
-    </nav>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Axios</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/schirrel/remote-logger@main/lib/remote-logger.min.js"></script>
+    <script>
+      DebugRemoteLogger("gyalS70vFjlKXieCIMVP");
+      const api = axios.create({
+        baseURL: "https://geode-ethereal-clarinet.glitch.me",
+        timeout: 600000,
+        headers: { Connnection: "keep-alive" },
+      });
+
+      function performFetch(method, url) {
+        const t0 = performance.now();
+        api[method](url)
+          .then(console.debug)
+          .catch((exception) => {
+            const t1 = performance.now();
+            const milli = t1 - t0;
+            const min = Math.floor((milli / 1000 / 60) << 0);
+
+            console.log(
+              `Call to ${method} ${url} exception.  At ${min}min  ||  ${milli}ms. At ${navigator.userAgent}`
+            );
+          });
+      }
+
+      function getNeverResponse() {
+        performFetch("get", `/get-never-responds`);
+      }
+
+      function postNeverResponse() {
+        performFetch("post", `/post-never-responds`);
+      }
+      function getLateResponse() {
+        performFetch("get", `/get-late-responds`);
+      }
+
+      function postLateResponse() {
+        performFetch("post", `/post-late-responds`);
+      }
+
+      const po = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          if (entry.name.startsWith(api)) console.log(entry.name, entry);
+        }
+      });
+      po.observe({ type: "resource", buffered: true });
+    </script>
+  </head>
+  <body>
+    <button type="button" onclick="getNeverResponse()">
+      get - never response
+    </button>
+    <button type="button" onclick="postNeverResponse()">
+      post - never response
+    </button>
+
+    <button type="button" onclick="getLateResponse()">
+      get - late response - 5s
+    </button>
+    <button type="button" onclick="postLateResponse()">
+      post- late response - 5s
+    </button>
+  </body>
 </html>
