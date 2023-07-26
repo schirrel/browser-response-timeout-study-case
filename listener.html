@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      span {
+        display: block;
+        margin-bottom: 8px;
+        border-bottom: 2px solid saddlebrown;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="logs"></div>
+    <script>
+      const logs = document.getElementById("logs");
+      document.addEventListener(
+        "visibilitychange",
+        function () {
+          console.log(document.hidden, document.visibilityState);
+          logs.innerHTML += `<span> <b>${new Date()}</b>: visibilitychange - ${
+            document.hidden
+          } ${document.visibilityState}</span>`;
+        },
+        false
+      );
+      document.addEventListener(
+        "load",
+        function ($evt) {
+          logs.innerHTML += `<span> <b>${new Date()}</b>: load - ${JSON.stringify(
+            $evt
+          )}</span>`;
+        },
+        false
+      );
+      document.addEventListener(
+        "unload",
+        function ($evt) {
+          logs.innerHTML += `<span> <b>${new Date()}</b>: unload - ${JSON.stringify(
+            $evt
+          )}</span>`;
+        },
+        false
+      );
+      document.addEventListener(
+        "freeze",
+        function ($evt) {
+          logs.innerHTML += `<span> <b>${new Date()}</b>: freeze - ${JSON.stringify(
+            $evt
+          )}</span>`;
+        },
+        false
+      );
+      document.addEventListener(
+        "resume",
+        function ($evt) {
+          logs.innerHTML += `<span> <b>${new Date()}</b>: resume - ${JSON.stringify(
+            $evt
+          )}</span>`;
+        },
+        false
+      );
+      document.addEventListener(
+        "pageshow",
+        function ($evt) {
+          logs.innerHTML += `<span> <b>${new Date()}</b>: pageshow - ${JSON.stringify(
+            $evt
+          )}</span>`;
+        },
+        false
+      );
+      document.addEventListener(
+        "pagehide",
+        function ($evt) {
+          logs.innerHTML += `<span> <b>${new Date()}</b>: pagehide - ${JSON.stringify(
+            $evt
+          )}</span>`;
+        },
+        false
+      );
+    </script>
+  </body>
+</html>
